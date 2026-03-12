@@ -1,8 +1,8 @@
-from rich import print
-from rich.panel import Panel
-
 #Crie uma classe Produto com nome e preço
 #Crie um método que crie uma etiqueta de produto
+
+from rich import print
+from rich.panel import Panel
 
 def traço():
     return print('-'*28)
