@@ -4,7 +4,7 @@
 from rich import print
 from rich.panel import Panel
 
-def traço():
+def linha():
     return print('-'*28)
 
 class Produto:
@@ -17,7 +17,7 @@ class Produto:
     def etiqueta(self):
         
         #Caixa = Panel('[white]{self.nome}}[/]', title='Produto', style='red')
-        #t = traço()
+        #l = linha()
         print(Panel(f'[white]{self.nome_prod}[/]', title='Produto', style='red', width=30))
 
     
