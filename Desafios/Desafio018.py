@@ -21,7 +21,7 @@ class Churrasco:
         #print(Panel(f'[white]{self.nome_prod.center(32 - len(self.nome_prod))}[/]\n[white]{l1}\n{l2}R${self.preço:,.2f}{l2}[/]', title='Produto', style='red', width=30))
 
 
-c1 = Churrasco('Churrasco dos Amigos', 15)
+c1 = Churrasco('Churrasco dos Amigos', 2000)
 c1.analisar()
 
 
