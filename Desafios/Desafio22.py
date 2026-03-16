@@ -28,19 +28,29 @@ class Controle:
             self.ch += 1
         elif func == '<':
             self.ch -= 1
+        #Limitadores
+        if self.ch > 5: # or self.ch < 1
+            self.ch = 1 #Limita em 1 e reinciar caso passe de 5
+        elif self.ch < 1:
+            self.ch = 5
         return self.ch
     
     def vol(self, func=0):#Criar o layout com a barra de progresso e colocar o limitador
         if func == '+':
             self.volu += 1
-        elif func == '<':
+        elif func == '-':
             self.volu -= 1
+        #Limitadores
+        if self.volu > 4:
+            self.volu = 4 #Limita em 4
+        if self.volu < 1:
+            self.volu = 1 #Limita em 1
         return self.volu
         
 c1 = Controle()
 
 while True:
-    r = input(f'< CH >{c1.canal()} - VOL +{c1.vol()} ')  #Falta fazer o input formatado  com o retorno do canal e volume atual, criar tela para TV ligada e paagsem de volume e canal
+    r = input(f'< CH >{c1.canal()} - VOL +{c1.vol()} ')  #Falta fazer o input formatado  com o retorno do canal e volume atual, criar tela para TV ligada e passagem de volume e canal
     
     if r == '@':
         count += 1
@@ -48,7 +58,7 @@ while True:
             c1.liga_tv()
         else:
             c1.desliga_tv()
-    if r == '<' or '>': #Deu certo, mas colocar limitadores de canol
+    if r == '<' or '>': #Deu certo, mas colocar limitadores de canal
         c1.canal(r)
     if r == '+' or '-': #Deu certo, mas colocar limitadores de vol
         c1.vol(r)
@@ -56,3 +66,4 @@ while True:
     if r == '0':
         break
 
+#OBS: Teve mesmo desligada está recebendo os comandos
