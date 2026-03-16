@@ -9,30 +9,50 @@
 
 from rich import print
 from rich.panel import Panel
+count = 0
 
 class Controle:
     def __init__(self, status=False):
-        if status == False:
-             print(Panel(':red_circle: [red] - A TV está desligada[/]', title='[ TV ] ', style='white', width=40))
-
-        elif status == '@':
-            print('Ligou')
+        self.desliga_tv()
+        self.ch = 1
+        self.volu = 1
     
-    def canal(self, func=0):
+    def liga_tv(self):
+        print(Panel(':green_circle: [green] - A TV está ligada[/]', title='[ TV ] ', style='white', width=40))
+        
+    def desliga_tv(self):
+        print(Panel(':red_circle: [red] - A TV está desligada[/]', title='[ TV ] ', style='white', width=40))
+    
+    def canal(self, func=0):#Criar o layout com troca de canal
         if func == '>':
-            ch += 1
+            self.ch += 1
         elif func == '<':
-            ch -= 1
-        return ch
-
+            self.ch -= 1
+        return self.ch
+    
+    def vol(self, func=0):#Criar o layout com a barra de progresso e colocar o limitador
+        if func == '+':
+            self.volu += 1
+        elif func == '<':
+            self.volu -= 1
+        return self.volu
+        
 c1 = Controle()
 
-while True:    
-    s = input(f'< CH{canal()} > ')
-
-    if s =='<' or s =='>':
-        c1.canal('s')
+while True:
+    r = input(f'< CH >{c1.canal()} - VOL +{c1.vol()} ')  #Falta fazer o input formatado  com o retorno do canal e volume atual, criar tela para TV ligada e paagsem de volume e canal
     
-    if s == '0':
+    if r == '@':
+        count += 1
+        if count%2 != 0:
+            c1.liga_tv()
+        else:
+            c1.desliga_tv()
+    if r == '<' or '>': #Deu certo, mas colocar limitadores de canol
+        c1.canal(r)
+    if r == '+' or '-': #Deu certo, mas colocar limitadores de vol
+        c1.vol(r)
+    #OBS: Canal está mechendo no volume, só essa verdade Canal meche no volume - Corrigir
+    if r == '0':
         break
 
