@@ -23,7 +23,7 @@ class Controle:
     def liga_tv(self):
         console.print(Panel(f"[white]CANAL: [/]{self.mostrar_canais()}\n\nVOLUME = {c1.mostrar_volume()}",title="[ TV ]",width=40))
         self.sts = 1
-        return self.sts
+        return 1
         
     def desliga_tv(self):
         print(Panel(':red_circle: [red] - A TV está desligada[/]', title='[ TV ] ', style='white', width=40))
@@ -75,11 +75,11 @@ while True:#Laçõ condicional infinito
         count += 1
         if count%2 != 0:
             #print(f'2° CONTADOR: {count}')
-            c1.liga_tv()
+            t = c1.liga_tv()#Chama método de ligar TV
         else:
             #print(f'3° CONTADOR: {count}')
             c1.desliga_tv()
-    if c1.liga_tv == 1:
+    if t == 1: #Métodos de volume só ativo se TV Ligada, sé entrar na condição de TV ligada
         if r == '<' or '>':
             c1.canal(r)
         if r == '+' or '-': 
@@ -87,5 +87,4 @@ while True:#Laçõ condicional infinito
     if r == '0':
         break
 
-#OBS.01: Agora controles não funcional, independente de estar o não ligado
-#OBS.02: Tem que controlar ou chamar os métodos somente quando ligado
+#OBS.01: Controlando na barra, mas não ta atualizando na tela ligada - Quadro de ligado
