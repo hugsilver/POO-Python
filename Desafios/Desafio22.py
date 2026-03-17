@@ -7,16 +7,22 @@
 
 from rich import print
 from rich.panel import Panel
+from rich.progress import Progress, BarColumn, TextColumn
+from rich.console import Console
 count = 0
+
+console = Console()
 
 class Controle:
     def __init__(self, status=False):
         self.desliga_tv()
         self.ch = 1
         self.volu = 1
+        self.canais = [1, 2, 3, 4, 5]
     
     def liga_tv(self):
-        print(Panel(':green_circle: [green] - A TV está ligada[/]', title='[ TV ] ', style='white', width=40))
+        #print(Panel(f'[white]CANAL = {self.mostrar_canais()} [/] \nVOLUME = {c1.mostrar_volume()}', title='[ TV ] ', style='white', width=40))
+        console.print(Panel(f"[white]CANAL: [/]{self.mostrar_canais()}\n\nVOLUME = {c1.mostrar_volume()}",title="[ TV ]",width=40))
         self.sts = 1
         return self.sts
         
@@ -48,6 +54,21 @@ class Controle:
         if self.volu < 1:
             self.volu = 1 #Limita em 1
         return self.volu
+
+    def mostrar_volume(self):
+        barra = "█" * self.volu + "░" * (4 - self.volu)
+        return f"[green]{barra}[/]"
+    
+    def mostrar_canais(self):
+        texto = ""
+        for c in self.canais:
+            if c == self.ch:
+                texto += f"[black on yellow] {c} [/] "
+            else:
+                texto += f"[white]{c}[/] "
+        return texto
+    
+
         
 c1 = Controle()
 
