@@ -15,19 +15,17 @@ console = Console()
 
 class Controle:
     def __init__(self, status=False):
-        self.desliga_tv() #Aqui mesmo
+        self.desliga_tv() #Começa desligado
         self.ch = 1
         self.volu = 1
         self.canais = [1, 2, 3, 4, 5]
     
     def liga_tv(self):
         console.print(Panel(f"[white]CANAL: [/]{self.mostrar_canais()}\n\nVOLUME = {c1.mostrar_volume()}",title="[ TV ]",width=40))
-        self.sts = 1
         return 1
         
     def desliga_tv(self):
         print(Panel(':red_circle: [red] - A TV está desligada[/]', title='[ TV ] ', style='white', width=40))
-        self.sts = 0
     
     def canal(self, func=0):#1Método para trocar de canaç
         if func == '>':
@@ -35,12 +33,13 @@ class Controle:
         elif func == '<':
             self.ch -= 1
         #Limitadores
-        if self.ch > 5: # or self.ch < 1
+        if self.ch > 5:
             self.ch = 1 #Limita em 1 e reinciar caso passe de 5
         elif self.ch < 1:
             self.ch = 5
+        console.print(Panel(f"[white]CANAL: [/]{self.mostrar_canais()}\n\nVOLUME = {c1.mostrar_volume()}",title="[ TV ]",width=40))#Aqui mesmo - Deu certo
         return self.ch
-    
+        
     def vol(self, func=0):#Método para aumentar ou diminuir volume
         if func == '+':
             self.volu += 1
@@ -52,7 +51,7 @@ class Controle:
         if self.volu < 1:
             self.volu = 1 #Limita em 1
         return self.volu
-
+    
     def mostrar_volume(self):#Método para representar a barra de columw
         barra = "█" * self.volu + "░" * (4 - self.volu)
         return f"[green]{barra}[/]"
@@ -87,4 +86,4 @@ while True:#Laçõ condicional infinito
     if r == '0':
         break
 
-#OBS.01: Controlando na barra, mas não ta atualizando na tela ligada - Quadro de ligado
+#OBS.01:Está dando erro com 0 ou com qualquer outro comando (< , > , - , +) quando desligada - Ajustar
