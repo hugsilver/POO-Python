@@ -15,7 +15,7 @@ console = Console()
 
 class Controle:
     def __init__(self, status=False):
-        self.desliga_tv() #Inicia com a tv desligada
+        self.desliga_tv() #Aqui mesmo
         self.ch = 1
         self.volu = 1
         self.canais = [1, 2, 3, 4, 5]
@@ -28,7 +28,6 @@ class Controle:
     def desliga_tv(self):
         print(Panel(':red_circle: [red] - A TV está desligada[/]', title='[ TV ] ', style='white', width=40))
         self.sts = 0
-        #return self.sts #Creio que não precise, retirar na próxima
     
     def canal(self, func=0):#1Método para trocar de canaç
         if func == '>':
@@ -70,13 +69,15 @@ class Controle:
 c1 = Controle() #Instanciando objeto com a classe
 
 while True:#Laçõ condicional infinito
+    #print(f'1° CONTADOR: {count}')#Contadores estão funcionando
     r = input(f'< CH >{c1.canal()} - VOL +{c1.vol()} ')  
-    
     if r == '@':
         count += 1
         if count%2 != 0:
+            #print(f'2° CONTADOR: {count}')
             c1.liga_tv()
         else:
+            #print(f'3° CONTADOR: {count}')
             c1.desliga_tv()
     if c1.liga_tv == 1:
         if r == '<' or '>':
@@ -86,4 +87,5 @@ while True:#Laçõ condicional infinito
     if r == '0':
         break
 
-#OBS: Agora controles não funcional, independente de estar o não ligado
+#OBS.01: Agora controles não funcional, independente de estar o não ligado
+#OBS.02: Tem que controlar ou chamar os métodos somente quando ligado
