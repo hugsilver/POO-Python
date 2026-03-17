@@ -9,19 +9,18 @@ from rich import print
 from rich.panel import Panel
 from rich.progress import Progress, BarColumn, TextColumn
 from rich.console import Console
-count = 0
 
+count = 0
 console = Console()
 
 class Controle:
     def __init__(self, status=False):
-        self.desliga_tv()
+        self.desliga_tv() #Inicia com a tv desligada
         self.ch = 1
         self.volu = 1
         self.canais = [1, 2, 3, 4, 5]
     
     def liga_tv(self):
-        #print(Panel(f'[white]CANAL = {self.mostrar_canais()} [/] \nVOLUME = {c1.mostrar_volume()}', title='[ TV ] ', style='white', width=40))
         console.print(Panel(f"[white]CANAL: [/]{self.mostrar_canais()}\n\nVOLUME = {c1.mostrar_volume()}",title="[ TV ]",width=40))
         self.sts = 1
         return self.sts
@@ -29,9 +28,9 @@ class Controle:
     def desliga_tv(self):
         print(Panel(':red_circle: [red] - A TV está desligada[/]', title='[ TV ] ', style='white', width=40))
         self.sts = 0
-        return self.sts
+        #return self.sts #Creio que não precise, retirar na próxima
     
-    def canal(self, func=0):#1° Criar o layout com troca de canal
+    def canal(self, func=0):#1Método para trocar de canaç
         if func == '>':
             self.ch += 1
         elif func == '<':
@@ -43,7 +42,7 @@ class Controle:
             self.ch = 5
         return self.ch
     
-    def vol(self, func=0):#3° Criar o layout com a barra de progresso e colocar o limitador
+    def vol(self, func=0):#Método para aumentar ou diminuir volume
         if func == '+':
             self.volu += 1
         elif func == '-':
@@ -55,11 +54,11 @@ class Controle:
             self.volu = 1 #Limita em 1
         return self.volu
 
-    def mostrar_volume(self):
+    def mostrar_volume(self):#Método para representar a barra de columw
         barra = "█" * self.volu + "░" * (4 - self.volu)
         return f"[green]{barra}[/]"
     
-    def mostrar_canais(self):
+    def mostrar_canais(self):#Método para representar o canal selecionado
         texto = ""
         for c in self.canais:
             if c == self.ch:
@@ -67,12 +66,10 @@ class Controle:
             else:
                 texto += f"[white]{c}[/] "
         return texto
-    
+            
+c1 = Controle() #Instanciando objeto com a classe
 
-        
-c1 = Controle()
-
-while True:
+while True:#Laçõ condicional infinito
     r = input(f'< CH >{c1.canal()} - VOL +{c1.vol()} ')  
     
     if r == '@':
@@ -89,4 +86,4 @@ while True:
     if r == '0':
         break
 
-#OBS: 1° TV mesmo desligada está recebendo os comandos AJUSTAR
+#OBS: Agora controles não funcional, independente de estar o não ligado
